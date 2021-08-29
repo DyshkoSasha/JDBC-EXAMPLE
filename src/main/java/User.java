@@ -8,7 +8,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-    private UUID id;
+    private UUID id_user;
     private String firstName;
     private String lastName;
     private int age;

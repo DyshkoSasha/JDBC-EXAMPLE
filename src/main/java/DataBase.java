@@ -35,9 +35,9 @@ public class DataBase {
         }
     }
 
-    public void createTable(String nameTable) {            // создаем таблицу
+    public void createTableUser(String nameTable) {            // создаем таблицу
         String insert = "CREATE TABLE IF NOT EXISTS " + nameTable +
-                " (id        VARCHAR(50) PRIMARY KEY, " +
+                " (id_user VARCHAR(50) PRIMARY KEY NOT NULL, " +
                 "    first_name VARCHAR(50) not NULL, " +
                 "    last_name  VARCHAR(50) not NULL, " +
                 "    age       INTEGER     not NULL);";
@@ -50,15 +50,47 @@ public class DataBase {
         }
     }
 
+    public void createTableAdress(String nameTable) {            // создаем таблицу
+        String insert = "CREATE TABLE IF NOT EXISTS " + nameTable +
+                " (id_adress VARCHAR(50) PRIMARY KEY, " +
+                "    city VARCHAR(50) not NULL, " +
+                "    street  VARCHAR(50) not NULL, " +
+                "    house   VARCHAR(50) not NULL," +
+                "FOREIGN KEY (id_adress)  REFERENCES users (id_user));";
+        connection = getConnection();
+        try {
+            PreparedStatement psSt = connection.prepareStatement(insert);
+            psSt.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     public void addUserTable(User user, String nameTale) {             //добавляем в таблицу
-        String insert = "INSERT INTO " + nameTale + " (id ,first_name, last_name,age)  " +
+        String insert = "INSERT INTO " + nameTale + " (id_user ,first_name, last_name,age)  " +
                 "VALUES  (?,?,?,?)";
         try {
             PreparedStatement prST = getConnection().prepareStatement(insert);
-            prST.setString(1, String.valueOf(user.getId()));
+            prST.setString(1, String.valueOf(user.getId_user()));
             prST.setString(2, user.getFirstName());
             prST.setString(3, user.getLastName());
             prST.setInt(4, user.getAge());
+            prST.addBatch();
+            prST.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void addAdressTable(Adress adress, String nameTale) {             //добавляем в таблицу
+        String insert = "INSERT INTO " + nameTale + " (id_adress ,city, street, house)  " +
+                "VALUES  (?,?,?,?)";
+        try {
+            PreparedStatement prST = getConnection().prepareStatement(insert);
+            prST.setString(1, String.valueOf(adress.getId_adress()));
+            prST.setString(2, adress.getCity());
+            prST.setString(3, adress.getStreet());
+            prST.setString(4, adress.getHouse());
             prST.addBatch();
             prST.executeUpdate();
         } catch (SQLException throwables) {
@@ -89,7 +121,7 @@ public class DataBase {
             ResultSet resultSet = psSt.executeQuery();
             while (resultSet.next()) {
                 User user = new User();
-                user.setId(UUID.fromString(resultSet.getString(1)));
+                user.setId_user(UUID.fromString(resultSet.getString(1)));
                 user.setFirstName(resultSet.getString(2));
                 user.setLastName(resultSet.getString(3));
                 user.setAge(resultSet.getInt(4));
@@ -112,7 +144,7 @@ public class DataBase {
             ResultSet resultSet = psSt.executeQuery();
             while (resultSet.next()) {
                 user = new User();
-                user.setId(UUID.fromString(resultSet.getString(1)));
+                user.setId_user(UUID.fromString(resultSet.getString(1)));
                 user.setFirstName(resultSet.getString(2));
                 user.setLastName(resultSet.getString(3));
                 user.setAge(resultSet.getInt(4));

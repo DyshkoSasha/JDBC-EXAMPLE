@@ -1,7 +1,9 @@
 public enum EnuConect {
         USER ("alex"),
         PASSWORD ("alex"),
-        NAME ("users");
+        NAME_ADRESS ("user_address"),
+        NAME_USERS ("users");
+
 
 
         private String str;
