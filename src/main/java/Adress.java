@@ -5,9 +5,9 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 public class Adress {
-    UUID id_adress;
-    String city;
-    String street;
-    String house;
+   private UUID id_adress;
+   private String city;
+   private String street;
+   private Integer house;
 
 }

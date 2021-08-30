@@ -13,38 +13,32 @@ public class Main {
 
         UUID uuid1 = UUID.randomUUID();
         User user1 = new User(uuid1, "Yuzik", "Labeckiy", 33);
-        Adress adress1 = new Adress(uuid1, "Minsk", "Nezavisimosti", "3");
+        Adress adress1 = new Adress(uuid1, "Minsk", "Nezavisimosti", 3);
         dataBase.addUserTable(user1, EnuConect.NAME_USERS.getEnuConect());
         dataBase.addAdressTable(adress1,EnuConect.NAME_ADRESS.getEnuConect());
 
         UUID uuid2 = UUID.randomUUID();
         User user2 = new User(uuid2, "Arkadiy", "Petyshinskiy", 31);
-        Adress adress2 = new Adress(uuid2, "Minsk", "Nezavisimosti", "3");
+        Adress adress2 = new Adress(uuid2, "Minsk", "Nezavisimosti", 3);
         dataBase.addUserTable(user2, EnuConect.NAME_USERS.getEnuConect());
         dataBase.addAdressTable(adress2,EnuConect.NAME_ADRESS.getEnuConect());
 
         UUID uuid3 = UUID.randomUUID();
         User user3 = new User(uuid3, "Andrei", "Kynin", 32);
-        Adress adress3 = new Adress(uuid3, "Brest", "Lenina", "5");
+        Adress adress3 = new Adress(uuid3, "Minsk", "Nezavisimosti", 5);
         dataBase.addUserTable(user3, EnuConect.NAME_USERS.getEnuConect());
         dataBase.addAdressTable(adress3,EnuConect.NAME_ADRESS.getEnuConect());
 
         UUID uuid4 = UUID.randomUUID();
         User user4 = new User(uuid4, "Sasha", "Soroka", 41);
-        Adress adress4 = new Adress(uuid4, "Beryoza", "Lenina", "1");
+        Adress adress4 = new Adress(uuid4, "Minsk", "Nezavisimosti", 1);
         dataBase.addUserTable(user4, EnuConect.NAME_USERS.getEnuConect());
         dataBase.addAdressTable(adress4,EnuConect.NAME_ADRESS.getEnuConect());
 
-//        dataBase.removeUserNa(EnuConect.TABLE, uuid);
+        dataBase.deleteUserById(EnuConect.NAME_USERS.getEnuConect(), uuid4);
 
-//        List<User> list = dataBase.getAllUsers(EnuConect.NAME_USERS.getEnuConect());
-//        System.out.println(list);
-//
-//        User user = dataBase.getUserById(EnuConect.NAME_USERS.getEnuConect(), uuid1);
-//        System.out.println(user);
-//
-//        dataBase.updateUsers(EnuConect.NAME_USERS.getEnuConect(), uuid2, user4);
-
-//        dataBase.deleteUsers(EnuConect.NAME.getEnuConect());
+        List<User> list = dataBase.getUserByHouse(EnuConect.NAME_ADRESS.getEnuConect()
+                ,adress1.getHouse());
+        System.out.println(list);
     }
 }
