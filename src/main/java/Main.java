@@ -14,22 +14,26 @@ public class Main {
         UUID uuid1 = UUID.randomUUID();
         User user1 = new User(UUID.randomUUID(), "Yuzik", "Labeckiy", 33, uuid1);
         Adress adress1 = new Adress(uuid1, "Minsk", "Nezavisimosti", 3);
-        dataBase.addTable(adress1, EnuConect.NAME_ADRESS.getEnuConect(), user1, EnuConect.NAME_USERS.getEnuConect());
+        dataBase.addTableAdress(adress1, EnuConect.NAME_ADRESS.getEnuConect());
+        dataBase.addTableUser(user1, EnuConect.NAME_USERS.getEnuConect());
 
         UUID uuid2 = UUID.randomUUID();
         User user2 = new User(UUID.randomUUID(), "Arkadiy", "Petyshinskiy", 31, uuid2);
         Adress adress2 = new Adress(uuid2, "Minsk", "Nezavisimosti", 3);
-        dataBase.addTable(adress2, EnuConect.NAME_ADRESS.getEnuConect(), user2, EnuConect.NAME_USERS.getEnuConect());
+        dataBase.addTableAdress(adress2, EnuConect.NAME_ADRESS.getEnuConect());
+        dataBase.addTableUser(user2, EnuConect.NAME_USERS.getEnuConect());
 
         UUID uuid3 = UUID.randomUUID();
         User user3 = new User(UUID.randomUUID(), "Andrei", "Kynin", 32, uuid3);
         Adress adress3 = new Adress(uuid3, "Minsk", "Nezavisimosti", 5);
-        dataBase.addTable(adress3, EnuConect.NAME_ADRESS.getEnuConect(), user3, EnuConect.NAME_USERS.getEnuConect());
+        dataBase.addTableAdress(adress3, EnuConect.NAME_ADRESS.getEnuConect());
+        dataBase.addTableUser(user3, EnuConect.NAME_USERS.getEnuConect());
 
         UUID uuid4 = UUID.randomUUID();
         User user4 = new User(UUID.randomUUID(), "Sasha", "Soroka", 41, uuid4);
         Adress adress4 = new Adress(uuid4, "Minsk", "Nezavisimosti", 1);
-        dataBase.addTable(adress4, EnuConect.NAME_ADRESS.getEnuConect(), user4, EnuConect.NAME_USERS.getEnuConect());
+        dataBase.addTableAdress(adress4, EnuConect.NAME_ADRESS.getEnuConect());
+        dataBase.addTableUser(user4, EnuConect.NAME_USERS.getEnuConect());
 
         dataBase.deleteUserById(EnuConect.NAME_ADRESS.getEnuConect(), uuid4);
 

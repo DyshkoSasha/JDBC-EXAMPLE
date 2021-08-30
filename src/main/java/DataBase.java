@@ -68,10 +68,7 @@ public class DataBase {
     }
 
 
-    public void addTable(Adress adress, String nameTableAdress, User user, String nameTableUser) {             //добавляем в таблицу
-        String insertUser = "INSERT INTO " + nameTableUser + " (id_user ,first_name, last_name, " +
-                "age, id_adress) VALUES  (?,?,?,?,?)";
-
+    public void addTableAdress(Adress adress, String nameTableAdress) {             //добавляем в таблицу
         String insertAdress = "INSERT INTO " + nameTableAdress + " (id_adress ,city, street, house)  " +
                 "VALUES  (?,?,?,?)";
         try {
@@ -82,7 +79,16 @@ public class DataBase {
             prSTAdress.setInt(4, adress.getHouse());
             prSTAdress.addBatch();
             prSTAdress.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 
+    public void addTableUser(User user, String nameTableUser) {             //добавляем в таблицу
+        String insertUser = "INSERT INTO " + nameTableUser + " (id_user ,first_name, last_name, " +
+                "age, id_adress) VALUES  (?,?,?,?,?)";
+
+        try {
             PreparedStatement prSTUser = getConnection().prepareStatement(insertUser);
             prSTUser.setString(1, String.valueOf(user.getId_user()));
             prSTUser.setString(2, user.getFirstName());
@@ -100,7 +106,6 @@ public class DataBase {
         String insert = "DELETE FROM " + nameTable + " WHERE id_adress =?";
         connection = getConnection();
         try {
-
             PreparedStatement psSt = connection.prepareStatement(insert);
             String str = uuid.toString();
             psSt.setString(1, str);
