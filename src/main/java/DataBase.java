@@ -67,26 +67,19 @@ public class DataBase {
         }
     }
 
-
-    public void addTableAdress(Adress adress, String nameTableAdress) {             //добавляем в таблицу
-        String insertAdress = "INSERT INTO " + nameTableAdress + " (id_adress ,city, street, house)  " +
-                "VALUES  (?,?,?,?)";
-        try {
-            PreparedStatement prSTAdress = getConnection().prepareStatement(insertAdress);
-            prSTAdress.setString(1, String.valueOf(adress.getId_adress()));
-            prSTAdress.setString(2, adress.getCity());
-            prSTAdress.setString(3, adress.getStreet());
-            prSTAdress.setInt(4, adress.getHouse());
-            prSTAdress.addBatch();
-            prSTAdress.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
-    public void addTableUser(User user, String nameTableUser) {             //добавляем в таблицу
+    public void addTable(User user, String nameTableUser, Adress adress, String nameTableAdress) {             //добавляем в таблицу
         String insertUser = "INSERT INTO " + nameTableUser + " (id_user ,first_name, last_name, " +
                 "age, id_adress) VALUES  (?,?,?,?,?)";
+
+        String insertAdress = "INSERT INTO " + nameTableAdress + " (id_adress ,city, street, house)  " +
+                "VALUES  (?,?,?,?)";
+
+
+        addTableAdress(adress, insertAdress);
+        addTableUser(user, insertUser);
+    }
+
+    public void addTableUser(User user, String insertUser) {             //добавляем в таблицу
 
         try {
             PreparedStatement prSTUser = getConnection().prepareStatement(insertUser);
@@ -97,6 +90,21 @@ public class DataBase {
             prSTUser.setString(5, String.valueOf(user.getId_adress()));
             prSTUser.addBatch();
             prSTUser.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void addTableAdress(Adress adress, String insertAdress) {             //добавляем в таблицу
+
+        try {
+            PreparedStatement prSTAdress = getConnection().prepareStatement(insertAdress);
+            prSTAdress.setString(1, String.valueOf(adress.getId_adress()));
+            prSTAdress.setString(2, adress.getCity());
+            prSTAdress.setString(3, adress.getStreet());
+            prSTAdress.setInt(4, adress.getHouse());
+            prSTAdress.addBatch();
+            prSTAdress.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
