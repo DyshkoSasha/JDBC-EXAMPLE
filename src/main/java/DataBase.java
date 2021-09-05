@@ -1,11 +1,14 @@
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Logger;
+
 
 public class DataBase {
     private Connection connection;
-
+    Logger log = Logger.getLogger(DataBase.class.getName());
     private Connection getConnection() {             // конектимся с ба3ой
         try {
             Class.forName("org.postgresql.Driver").newInstance();
@@ -45,6 +48,7 @@ public class DataBase {
         try {
             PreparedStatement psSt = connection.prepareStatement(insert);
             psSt.executeUpdate();
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -62,6 +66,7 @@ public class DataBase {
         try {
             PreparedStatement psSt = connection.prepareStatement(insert);
             psSt.executeUpdate();
+            log.info("Sozdali tablicy");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -90,6 +95,8 @@ public class DataBase {
             prSTUser.setString(5, String.valueOf(user.getId_adress()));
             prSTUser.addBatch();
             prSTUser.executeUpdate();
+            log.info("Zapolnili tablicy adresov");
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -105,6 +112,8 @@ public class DataBase {
             prSTAdress.setInt(4, adress.getHouse());
             prSTAdress.addBatch();
             prSTAdress.executeUpdate();
+            log.info("Zapolnili tablicy userov");
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
